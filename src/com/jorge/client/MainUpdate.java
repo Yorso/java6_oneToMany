@@ -53,9 +53,9 @@ public class MainUpdate {
 											   // Guide (inverse end) only care about itself. It does not care about the relationship
 			
 			//student.setGuide(guide); // This way works because Student is the owner of the relationship. 
-									   // But we want update data through guide object
+									   // But we want update data through Guide object (Guide is not the owner of the relationship)
 			
-			guide.addStudent(student); // This way works too and it is the way we are looking for, update data from entity that is not the owner of the relationship
+			guide.addStudent(student); // This way works too and it is the way we are looking for, update data from entity that is not the owner of the relationship => Guide
 									   // addStudent() method is implemented in Guide.java class by us
 			
 			//session.persist(guide); // We don't need this instruction for updating data in DB
