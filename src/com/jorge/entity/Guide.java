@@ -86,7 +86,7 @@ public class Guide {
 	}
 
 	// This makes Guide responsible about the relationship to update data in both entities
-	// I.e: if you want a student to change guide
+	// We can update data from One side (not owner)
 	public void addStudent(Student student){
 		students.add(student);
 		student.setGuide(this);;

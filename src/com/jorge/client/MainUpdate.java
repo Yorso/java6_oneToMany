@@ -20,6 +20,7 @@ import com.jorge.util.HibernateUtil;
  * Owner cares about the relationship
  * Owner is the entity that is persisted to the table that has the foreign key column
  *
+ * In this class, we want One side (not owner) to update data
  */
 public class MainUpdate {
 
@@ -45,18 +46,21 @@ public class MainUpdate {
 			logger.debug("getting Student data");
 			Student student = (Student)session.get(Student.class, 2L);
 			
-			// Both of students are associated with guide 1. Now we want student 2 to associate with guide 2
+			// Both of students are associated to guide 1. Now we want student 2 to associate to guide 2
 			logger.debug("associating student 2 to guide 2");
 			//guide.getStudent().add(student); // Wrong way!!!! student 2 continues associated to guide 1
-											   // It is because of the Guide is not the owner of the relationship (Student is).
+											   // It is because of the Guide (one side) is not the owner (many side) of the relationship (Student is).
 											   // Guide is not responsible of the relationship
 											   // Guide (inverse end) only care about itself. It does not care about the relationship
 			
-			//student.setGuide(guide); // This way works because Student is the owner of the relationship. 
-									   // But we want update data through Guide object (Guide is not the owner of the relationship)
+			//student.setGuide(guide); // This way works fine because Student is the owner of the relationship. 
+									   // But this way is not what we are looking for because we are updating data from Many side (Owner) to One side (not owner) and 
+									   // we want to update data from One side (not owner - Guide object) to many side (Many side). Guide is not the owner of the relationship.
+									   // The result with both methods (Many to One or One to Many) is the same.
 			
-			guide.addStudent(student); // This way works too and it is the way we are looking for, update data from entity that is not the owner of the relationship => Guide
+			guide.addStudent(student); // This way works fine too and it is the way we are looking for, update data from entity that is not the owner of the relationship => Guide
 									   // addStudent() method is implemented in Guide.java class by us
+									   // The result with both methods (Many to One or One to Many) is the same.
 			
 			//session.persist(guide); // We don't need this instruction for updating data in DB
 			
