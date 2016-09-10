@@ -1,11 +1,18 @@
 package com.jorge.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+// ONE SIDE entity => INVERSE END
 
 @Entity
 @Table(name="guide")
@@ -24,6 +31,11 @@ public class Guide {
 	
 	@Column(name="salary")
 	private Integer salary;
+	
+	@OneToMany(mappedBy="guide", cascade={CascadeType.PERSIST}) // 'guide' is the name of the private attribute in Student.java class => private Guide guide;
+								 								// It tells Hibernate to get the set of students that are using the foreign key => guide_id in DB => private Guide guide;
+																// CascadeType.PERSIST: Everything you change in guide row is save in its linked student rows automatically
+	private Set<Student> students = new HashSet<Student>();
 	
 	public Guide() {}
 	
@@ -65,10 +77,25 @@ public class Guide {
 		this.salary = salary;
 	}
 
+	public Set<Student> getStudents() {
+		return students;
+	}
+
+	public void setStudents(Set<Student> students) {
+		this.students = students;
+	}
+
+	// This makes Guide responsible about the relationship to update data in both entities
+	// I.e: if you want a student to change guide
+	public void addStudent(Student student){
+		students.add(student);
+		student.setGuide(this);;
+	}
+
 	@Override
 	public String toString() {
-		return "Guide [id=" + id + ", staffId=" + staffId + ", name=" + name + ", salary=" + salary + "]";
+		return "Guide [id=" + id + ", staffId=" + staffId + ", name=" + name + ", salary=" + salary + ", students="
+				+ students + "]";
 	}
 	
-
 }
