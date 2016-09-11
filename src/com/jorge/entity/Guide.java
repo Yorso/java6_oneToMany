@@ -35,6 +35,7 @@ public class Guide {
 	@OneToMany(mappedBy="guide", cascade={CascadeType.PERSIST}) // 'guide' is the name of the private attribute in Student.java class => private Guide guide;
 								 								// It tells Hibernate to get the set of students that are using the foreign key => guide_id in DB => private Guide guide;
 																// CascadeType.PERSIST: Everything you change in guide row is save in its linked student rows automatically
+																// 'mappedBy' attribute declares this class as not responsible for the relationship
 	private Set<Student> students = new HashSet<Student>();
 	
 	public Guide() {}

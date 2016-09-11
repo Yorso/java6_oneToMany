@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 // MANY SIDE entity => OWNER of this bidirectional relationship
+// The owner of the relationship is responsible for the association column(s) update
 
 @Entity
 //@Table(name="student") // If we comment @Table annotation, Hibernate will create a table with the name of this calss => "Student" (CASE SENSITIVE!!!)
