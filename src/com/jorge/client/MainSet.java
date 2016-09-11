@@ -41,11 +41,11 @@ public class MainSet {
 
 			logger.debug("setting data in Guide objects");
 			Guide guide1 = new Guide("GD200331", "Homer Simpson", 1200);
-			Guide guide2 = new Guide("GD200331", "Marge Simpson", 1600);
+			Guide guide2 = new Guide("GD200332", "Marge Simpson", 1600);
 			
 			logger.debug("setting data in Student objects");
 			Student student1 = new Student("ST109883", "Bart Simpson", guide1); // Guide 1
-			Student student2 = new Student("ST109883", "Lisa Simpson", guide1); // Guide 1 too
+			Student student2 = new Student("ST109884", "Lisa Simpson", guide1); // Guide 1 too
 			
 			logger.debug("adding Student objects to Guide objects");
 			guide1.getStudents().add(student1);
