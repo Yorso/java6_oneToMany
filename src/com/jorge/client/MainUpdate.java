@@ -64,6 +64,8 @@ public class MainUpdate {
 			
 			//session.persist(guide); // We don't need this instruction for updating data in DB
 			
+			
+			
 			logger.debug("making commit");
 			txn.commit();
 			
